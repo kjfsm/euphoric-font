@@ -75,16 +75,9 @@ Python の依存を上げるときは `scripts/docker-make update` を走らせ�
 
 ## リリース
 
-1. `sources/config.yaml` の `localMetadata.version` を上げる(`0.001` → `0.002` のように小数3桁)
-2. コミットして main に push する
-3. 同じ文字列のタグ(`v` は付けない)を push する
+リリースしたい PR の中で `sources/config.yaml` の `localMetadata.version` を上げる(`0.001` → `0.002` のように小数3桁)。その PR を main にマージすると、GitHub Actions がビルドし、その版のタグがまだ無ければタグ(`v` なしの `0.002`)と Release を作って、フォントの zip を付ける。版を上げずにマージしても、リリースはされない。
 
-   ```sh
-   git tag 0.002
-   git push origin 0.002
-   ```
-
-GitHub Actions がビルドし、フォントの zip を Release に付ける。タグと `version` が一致しないと Release は作られない。
+手でタグを push してもリリースできる。そのときは、タグとフォントの版が一致しないとビルドが止まる。
 
 ## Changelog
 

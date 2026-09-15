@@ -1,0 +1,44 @@
+# gftools builder の設定。使えるキーは gftools/builder/schema.py にあるものだけで、
+# 知らないキーがあるとビルドが止まる。
+#
+# EuphoricPixel-Regular.ufo は scripts/png2ufo.py がグリフシート(*.png と *.txt)から作るので、
+# 直接は編集しない。gftools は UFO の名前をそのままフォントのファイル名に使う。
+sources:
+  - EuphoricPixel-Regular.ufo
+familyName: "Euphoric Pixel"
+
+buildVariable: false
+buildOTF: false
+buildWebfont: true
+# 自動ヒンティングはドットの輪郭をグリッドからずらす。
+autohintTTF: false
+
+# ここから下は scripts/png2ufo.py が読む。gftools builder は読まない。
+localMetadata:
+  # Google Fonts と同じく 0.001 のように小数3桁で書く。Release のタグもこれと同じ文字列にする。
+  version: "0.001"
+  styleName: Regular
+  designer: kjfsm
+  copyright: "Copyright 2026 The Euphoric Pixel Project Authors (https://github.com/kjfsm/euphoric-font)"
+  license: "This Font Software is licensed under the SIL Open Font License, Version 1.1. This license is available with a FAQ at: https://openfontlicense.org"
+  licenseURL: "https://openfontlicense.org"
+  # この順にグリフを並べる。それぞれ sources/<名前>.png と sources/<名前>.txt を読む。
+  sheets:
+    - uppercase
+    - lowercase
+    - digits
+    - symbols
+  # グリフシートの高さは、ベースラインより上の行と下の行の合計にする。
+  rowsAboveBaseline: 5
+  rowsBelowBaseline: 1
+  # ここから下の長さの単位はドット。
+  capHeight: 5
+  xHeight: 3
+  letterSpacing: 1
+  spaceWidth: 3
+  # 1em を 8 ドットにする。font-size が 8px の倍数のとき、1ドットがちょうど整数の px になる。
+  # unitsPerEm(= unitsPerDot × dotsPerEm)は、fontspector が勧める2の累乗の 1024 にする。
+  unitsPerDot: 128
+  dotsPerEm: 8
+  # 行の上端。残り(dotsPerEm - ascender)が descender になる。
+  ascender: 6

@@ -1,0 +1,9 @@
+/* Euphoric Pixel (SIL Open Font License 1.1) https://github.com/kjfsm/euphoric-font
+   font-size を 8px の倍数にすると、1ドットがちょうど整数の px になる。 */
+@font-face {
+  font-family: "Euphoric Pixel";
+  src: url("EuphoricPixel-Regular.woff2?v=@HASH@") format("woff2");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}

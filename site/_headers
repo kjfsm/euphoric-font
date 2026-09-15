@@ -1,0 +1,11 @@
+/euphoric-pixel/*
+  Access-Control-Allow-Origin: *
+
+# URL に版を入れずに常に最新を配るので、CSS は短くキャッシュする。
+/euphoric-pixel/euphoric-pixel.css
+  Cache-Control: public, max-age=300, stale-while-revalidate=86400
+
+# CSS からは中身のハッシュを付けた URL で読むので、フォントが変われば URL も変わる。
+# ここを長くしないのは、woff2 の URL を直接指定されたときに古いまま残らないようにするため。
+/euphoric-pixel/EuphoricPixel-Regular.woff2
+  Cache-Control: public, max-age=86400, stale-while-revalidate=604800

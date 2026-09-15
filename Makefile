@@ -13,6 +13,7 @@ help:
 	@echo "  make test:   Tests the fonts with fontspector"
 	@echo "  make proof:  Creates HTML proof documents in the out/proof/ directory"
 	@echo "  make images: Creates PNG specimen images in the documentation/ directory"
+	@echo "  make site:   Collects the files served on fonts.euphoric.band into dist/"
 	@echo
 
 build: build.stamp
@@ -43,6 +44,9 @@ images: venv $(DRAWBOT_OUTPUT)
 
 %.png: %.py build.stamp
 	. venv/bin/activate; python3 $< --output $@
+
+site: build.stamp
+	sh scripts/build-site.sh
 
 clean:
 	rm -rf venv

@@ -88,13 +88,6 @@ jobs:
         continue-on-error: true
       - name: Generate proofs
         run: make proof
-      - name: Set up test result site
-        run: cp scripts/index.html out/index.html
-      - name: Collect deployment assets
-        if: ${{ github.ref_name == github.event.repository.default_branch }}
-        uses: actions/upload-pages-artifact@v5
-        with:
-          path: ./out
       - name: Archive artifacts
         uses: actions/upload-artifact@v6
         with:
@@ -106,21 +99,25 @@ jobs:
       zip_name: ${{ env.ZIP_NAME }}
       release_tag: ${{ steps.release.outputs.tag }}
 
+  # テンプレートは検査レポートを GitHub Pages に置くが、ここではフォントと一緒に
+  # fonts.euphoric.band(Cloudflare Workers)で配る。
   deploy:
-    name: Deploy results to GitHub Pages
+    name: Deploy to Cloudflare Workers
     if: ${{ github.ref_name == github.event.repository.default_branch }}
     needs: build
     runs-on: ubuntu-latest
-    permissions:
-      pages: write
-      id-token: write
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v5
+      - uses: actions/checkout@v6
+      - name: Use font artifacts from CI
+        uses: actions/download-artifact@v7
+        with:
+          name: ${{ needs.build.outputs.zip_name }}
+      - name: Collect files to serve
+        run: sh scripts/build-site.sh
+      - name: Deploy
+        run: npx --yes wrangler@4.131.2 deploy
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
 
   # There are two ways a release can be created: either by pushing a tag, or by
   # creating a release from the GitHub UI. Pushing a tag does not automatically

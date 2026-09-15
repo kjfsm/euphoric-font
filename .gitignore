@@ -6,6 +6,8 @@ proof
 fonts
 out
 sources/*.ufo
+dist
+.wrangler
 .claude/worktrees/
 node_modules
 package-lock.json

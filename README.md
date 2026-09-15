@@ -21,15 +21,13 @@ abcdefghijklmnopqrstuvwxyz
 
 ## Web で使う
 
-[Releases](https://github.com/kjfsm/euphoric-font/releases) の zip から `webfonts/EuphoricPixel-Regular.woff2` を取り出して置く。
+[fonts.euphoric.band](https://fonts.euphoric.band/euphoric-pixel/) で、いつも最新版を配っている。CSS を1行読み込めば使える。
+
+```html
+<link rel="stylesheet" href="https://fonts.euphoric.band/euphoric-pixel/euphoric-pixel.css">
+```
 
 ```css
-@font-face {
-  font-family: "Euphoric Pixel";
-  src: url("EuphoricPixel-Regular.woff2") format("woff2");
-  font-display: swap;
-}
-
 .pixel {
   font-family: "Euphoric Pixel", monospace;
   font-size: 16px; /* 8px の倍数 */

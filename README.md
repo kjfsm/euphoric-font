@@ -53,7 +53,7 @@ abcdefghijklmnopqrstuvwxyz
 - PNG は高さ6px。上5行がベースラインより上、一番下の1行がベースラインより下
 - 黒 `#000000` が点、白か透明が空白。ほかの色が混ざるとビルドが止まる
 - 文字は横1列に並べ、1列以上空けて区切る。文字の中に空いた列を作ると、そこで2文字に割れる
-- 文字の間隔(1ドット)とスペースの幅は `sources/config.yaml` で決まるので、描かなくてよい
+- 文字の間隔(1ドット)とスペースの幅は `sources/config.yaml` で決まるので、描かなくてよい。右側が空いた F のような文字は、`letterSpacingOverrides` で文字ごとに間隔を変えられる
 - txt には、PNG に並べた順に文字を1行で書く。PNG を切った文字数と txt の文字数が合わないとビルドが止まる
 
 `scripts/png2ufo.py` がグリフシートから `sources/EuphoricPixel-Regular.ufo` を作り、そこから先は [gftools builder](https://github.com/googlefonts/gftools) と fontmake がビルドする。UFO は毎回作り直すので、直接は編集しない。
@@ -80,6 +80,11 @@ Python の依存を上げるときは `scripts/docker-make update` を走らせ�
 手でタグを push してもリリースできる。そのときは、タグとフォントの版が一致しないとビルドが止まる。
 
 ## Changelog
+
+**2026-10-05 Version 0.002**
+
+- t の縦棒を横棒の上へ1ドット出す
+- F の右の余白を無くし、「Fo」のように続く文字との間を詰める
 
 **2026-09-15 Version 0.001**
 

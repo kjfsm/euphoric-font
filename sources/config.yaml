@@ -35,6 +35,11 @@ localMetadata:
   capHeight: 5
   xHeight: 3
   letterSpacing: 1
+  # グリフの右に付ける余白を、文字ごとに letterSpacing から変える。
+  # キーは引用符で囲む。囲まないと YAML は 1 や y を数値や真偽値として読む。
+  letterSpacingOverrides:
+    # 右側が空いた形なので、余白を足すと次の文字から離れて見える。
+    "F": 0
   spaceWidth: 3
   # 1em を 8 ドットにする。font-size が 8px の倍数のとき、1ドットがちょうど整数の px になる。
   # unitsPerEm(= unitsPerDot × dotsPerEm)は、fontspector が勧める2の累乗の 1024 にする。

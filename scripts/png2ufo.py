@@ -177,6 +177,7 @@ def build(config):
     unit = meta["unitsPerDot"]
     above = meta["rowsAboveBaseline"]
     spacing = meta["letterSpacing"]
+    overrides = meta.get("letterSpacingOverrides") or {}
 
     font = ufoLib2.Font()
     set_info(font.info, config, meta)
@@ -208,7 +209,7 @@ def build(config):
             defined_in[char] = txt
             glyph = font.newGlyph(glyph_name(char))
             glyph.unicodes = [ord(char)]
-            glyph.width = (end - start + spacing) * unit
+            glyph.width = (end - start + overrides.get(char, spacing)) * unit
             dots = {
                 (x - start, above - 1 - y)
                 for y, row in enumerate(bitmap)
@@ -216,6 +217,10 @@ def build(config):
                 if row[x]
             }
             draw(glyph, dots, unit)
+
+    unknown = [c for c in overrides if c not in defined_in]
+    if unknown:
+        raise SheetError(f"{CONFIG}: letterSpacingOverrides の {unknown} はどのグリフシートにも無い")
 
     font.lib["public.glyphOrder"] = list(font.keys())
     return font

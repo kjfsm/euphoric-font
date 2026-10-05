@@ -16,7 +16,7 @@ autohintTTF: false
 # ここから下は scripts/png2ufo.py が読む。gftools builder は読まない。
 localMetadata:
   # Google Fonts と同じく 0.001 のように小数3桁で書く。Release のタグもこれと同じ文字列にする。
-  version: "0.001"
+  version: "0.002"
   styleName: Regular
   designer: kjfsm
   copyright: "Copyright 2026 The Euphoric Pixel Project Authors (https://github.com/kjfsm/euphoric-font)"
